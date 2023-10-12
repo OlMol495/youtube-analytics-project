@@ -17,6 +17,10 @@ class Channel:
         self.video_count = dict_to_load["items"][0]["statistics"]["videoCount"]
         self.viewing_count = dict_to_load["items"][0]["statistics"]["viewCount"]
 
+    def __str__(self):
+        return f"{self.title} ({self.url}"
+
+
     @classmethod
     def get_service(cls):
         """return object to work with API"""
@@ -27,7 +31,6 @@ class Channel:
     def channel_id(self):
         """make channel_id impossible to change"""
         return self.__channel_id
-
 
     def to_json(self, json_file):
         """download to json file"""
@@ -40,6 +43,31 @@ class Channel:
         """Выводит в консоль информацию о канале."""
         dict_to_print = self.get_service().channels().list(id=self.__channel_id, part='snippet,statistics').execute()
         print(json.dumps(dict_to_print, indent=2, ensure_ascii=False))
+
+    def __add__(self, other):
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __le__(self, other):
+        return self.subscriber_count <= other.subscriber_count
+
+    def __ge__(self, other):
+        return self.subscriber_count >= other.subscriber_count
+
+    def __lt__(self, other):
+        return self.subscriber_count < other.subscriber_count
+
+    def __gt__(self, other):
+        return self.subscriber_count > other.subscriber_count
+
+    def __eq__(self, other):
+        return self.subscriber_count == other.subscriber_count
+
+    def __ne__(self, other):
+        return self.subscriber_count != other.subscriber_count
+
 
 
 
