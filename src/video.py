@@ -25,15 +25,9 @@ class Video:
         with open(json_file, "w") as f:
             json.dump(self.video_request, f)
 
-video1 = Video('AWX4JnAnjBE')
-# video1.to_json("video.json")
 
 class PLVideo(Video):
     def __init__(self, video_id, playlist_id):
         super().__init__(video_id)
         self.playlist_id = playlist_id
 
-video2 = PLVideo('4fObz_qw9u4', 'PLv_zOGKKxVph_8g2Mqc3LMhj0M_BfasbC')
-
-print(str(video2))
-print(str(video1))
