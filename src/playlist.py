@@ -44,6 +44,7 @@ class PlayList:
 
 
     def show_best_video(self):
+        """Returns url to a video with max likes"""
         max_likes = 0
         video_url = ""
         for video in self.video_response['items']:
